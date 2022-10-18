@@ -1,6 +1,10 @@
-#include <iostream>
+#include "BankAccount.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+  BankAccount account;
+
+  account.deposit(200);
+  account.withdraw(100);
+
+  return 0;
 }
