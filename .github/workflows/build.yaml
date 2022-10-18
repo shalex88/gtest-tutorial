@@ -25,4 +25,4 @@ jobs:
       run: cmake --build build --config ${{env.BUILD_TYPE}}
 
     - name: Run
-      run: ./build/${{ steps.repo-name.outputs.value }}
+      run: ./build/tests/${{ steps.repo-name.outputs.value }}_test
