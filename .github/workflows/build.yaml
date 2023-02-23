@@ -12,17 +12,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+      - name: Checkout source code
+        uses: actions/checkout@v3
 
-    - name: Get repo name
-      id: repo-name
-      run: echo "::set-output name=value::$(echo "${{ github.repository }}" | awk -F '/' '{print $2}')"
+      - name: Get repo name
+        id: repo-name
+        run: echo "value=$(echo "${{ github.repository }}" | awk -F '/' '{print $2}')" >> $GITHUB_OUTPUT
 
-    - name: Configure
-      run: cmake -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      - name: Configure
+        run: cmake -G "Unix Makefiles" -B build -DCMAKE_BUILD_TYPE=$BUILD_TYPE
 
-    - name: Build
-      run: cmake --build build --config ${{env.BUILD_TYPE}}
+      - name: Build
+        run: cmake --build build --config ${{env.BUILD_TYPE}}
 
-    - name: Run
-      run: ./build/tests/${{ steps.repo-name.outputs.value }}_test
+      - name: Test
+        run: cd ./build/$sub_project && ./$bin
+        env:
+          sub_project: tests
+          bin: ${{ steps.repo-name.outputs.value }}_test
