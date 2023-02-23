@@ -13,8 +13,7 @@ FetchContent_MakeAvailable(googletest)
 
 file(GLOB_RECURSE sourceFiles CONFIGURE_DEPENDS "../source/*.cpp")
 list(REMOVE_ITEM sourceFiles "${CMAKE_CURRENT_SOURCE_DIR}/../source/main.cpp")
-file(GLOB_RECURSE headerFiles CONFIGURE_DEPENDS "../include/*.h")
 file(GLOB_RECURSE testFiles CONFIGURE_DEPENDS "*.cpp")
 
-add_executable(${PROJECT_NAME} ${sourceFiles} ${headerFiles} ${testFiles})
+add_executable(${PROJECT_NAME} ${sourceFiles} ${testFiles})
 target_link_libraries(${PROJECT_NAME} gtest gtest_main)

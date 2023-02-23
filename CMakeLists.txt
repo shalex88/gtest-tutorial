@@ -6,15 +6,14 @@ set(CMAKE_CXX_STANDARD 17)
 if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     add_compile_options(-Wall -Wextra -Wpedantic)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    add_compile_options(/W4)
+    add_compile_options(/W3)
 else()
     message(WARNING "Unknown Compiler ${CMAKE_CXX_COMPILER_ID}")
 endif()
 
 include_directories(include)
 file(GLOB_RECURSE sourceFiles CONFIGURE_DEPENDS "source/*.cpp")
-file(GLOB_RECURSE headerFiles CONFIGURE_DEPENDS "include/*.h")
 
-add_executable(${PROJECT_NAME} ${sourceFiles} ${headerFiles})
+add_executable(${PROJECT_NAME} ${sourceFiles})
 
 add_subdirectory(tests)
